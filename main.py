@@ -37,7 +37,8 @@ serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
 serv_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # Bind server socket to loopback network interface.
-host_ip = socket.gethostbyname(socket.gethostname)
+host_ip = socket.gethostbyname(socket.gethostname())
+print(host_ip)
 
 serv_sock.bind((host_ip, 8080))
 serv_sock.setblocking(0)
