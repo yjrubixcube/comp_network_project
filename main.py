@@ -518,7 +518,7 @@ while True:
                 print('New connection from', client_addr, client_sock)
             elif r not in vid_sock:
                 data = r.recv(2048)
-
+                print(data)
                 print(data.decode())
                 if (data.decode() == "video_client"):
                     vid_sock.append(r)
