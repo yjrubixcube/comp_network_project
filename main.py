@@ -499,7 +499,7 @@ def video_splitter():
 threading.Thread(target=video_splitter, args=()).start()
 threading.Thread(target=audio_splitter, args=()).start()
 
-
+print("server started, ctrl c to close")
 while True:
     # Accept new connections in an infinite loop.
 
