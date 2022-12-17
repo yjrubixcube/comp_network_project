@@ -37,7 +37,9 @@ serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
 serv_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
 # Bind server socket to loopback network interface.
-serv_sock.bind(('127.0.0.1', 8080))
+host_ip = socket.gethostbyname(socket.gethostname)
+
+serv_sock.bind((host_ip, 8080))
 serv_sock.setblocking(0)
 
 # Turn server socket into listening mode.
@@ -452,7 +454,7 @@ def stream_video(sock):
 def audio_splitter():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    s.bind(("127.0.0.1", 9099))
+    s.bind((host_ip, 9099))
     s.listen(10)
 
     while 1:
@@ -474,7 +476,7 @@ def video_splitter():
     # global udp_sock
     udp_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
     udp_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    udp_sock.bind(("127.0.0.1", 9090))
+    udp_sock.bind((host_ip, 9090))
     udp_sock.listen(10)
     while 1:
         try:
