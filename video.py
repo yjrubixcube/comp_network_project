@@ -11,7 +11,8 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
 # client_socket.setsockopt(socket.SOL_SOCKET,socket.SO_RCVBUF,BUFF_SIZE)
 # client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 # host_name = socket.gethostname()
-host_ip = '127.0.0.1'#  socket.gethostbyname(host_name)
+# host_ip = '127.0.0.1'#  socket.gethostbyname(host_name)
+host_ip = input("Enter ip:")
 print(host_ip)
 port = 9090
 message = b'Hello'

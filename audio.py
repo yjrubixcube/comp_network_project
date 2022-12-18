@@ -10,7 +10,8 @@ stream = p.open(format=p.get_format_from_width(2),
                 frames_per_buffer=CHUNK)
 
 client_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
-sock_addr = ("127.0.0.1", 9099)
+host_ip = input("Enter ip:")
+sock_addr = (host_ip, 9099)
 client_sock.connect(sock_addr)
 client_sock.sendall("hello".encode())
 print("sent")
