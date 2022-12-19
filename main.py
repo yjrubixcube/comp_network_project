@@ -199,6 +199,17 @@ def format_html(args: str, biscuit: str):
             content = file.read()
         return content.format(prev_msg=prev_msg, name=args[-1][8:]), args[-1][8:]
 
+    elif args[-1].startswith("refresh="):
+        with open("data/prev_msg.txt", 'r') as file:
+            prev_msg = file.readlines()
+            if len(prev_msg) > 15:
+                prev_msg = prev_msg[-15:]
+            prev_msg = "".join(prev_msg)
+        
+        with open("htmls/message.html", 'r') as file:
+            content = file.read()
+        return content.format(prev_msg=prev_msg, name=args[-1][8:]), args[-1][8:]
+
     elif args[-1].startswith("submit_msg="):
         resp_name, resp_msg = args[-1][11:], args[0][8:]
         if resp_msg == "":
