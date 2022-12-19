@@ -408,11 +408,15 @@ def stream_audio(sock):
         print("opened")
         while 1:
             data = wf.readframes(CHUNK)
+            if data == None:
+                break
             a = pickle.dumps(data)
             msg = struct.pack("Q", len(a))+a
             sock.sendall(msg)
+        sock.close()
     except Exception as e:
         print("audio error:", e)
+        sock.close()
         return
 
 def stream_video(sock):
@@ -421,7 +425,8 @@ def stream_video(sock):
         # print(addr)
         WIDTH = 400
         # print("revced")
-        vid = cv2.VideoCapture("never_gonna_give_you_up.mkv")
+        # vid = cv2.VideoCapture("never_gonna_give_you_up.mkv")
+        vid = cv2.VideoCapture("video_test.mkv")
         fps,st,frames_to_count,cnt = (0,0,20,0)
         while vid.isOpened():
             _,frame = vid.read()
