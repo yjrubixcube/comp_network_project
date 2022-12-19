@@ -41,7 +41,7 @@ host_ip = socket.gethostbyname(socket.gethostname())
 print(host_ip)
 
 serv_sock.bind((host_ip, 8080))
-serv_sock.setblocking(0)
+serv_sock.setblocking(1)
 
 # Turn server socket into listening mode.
 serv_sock.listen(10)
@@ -311,7 +311,7 @@ def write_sock(sock, args, biscuit):
         sock.sendall(http_header.encode())
         print("done")
         sock.sendall(html_content.encode())
-        sock.close()
+        # sock.close()
     except Exception as e:
         print(f"error: {e}")
         err_handle(sock, "404", "not found")
@@ -502,11 +502,58 @@ def video_splitter():
 threading.Thread(target=video_splitter, args=()).start()
 threading.Thread(target=audio_splitter, args=()).start()
 
+def thd_splitter():
+    while 1:
+        try:
+            client_sock, client_addr = serv_sock.accept()
+            print("new conn", client_addr, client_sock)
+            # data = client_sock.recv(2048)
+            # print(data)
+            threading.Thread(target=main_thd, args=(client_sock, client_addr)).start()
+
+        except Exception as e:
+            print("E", e)
+
+def main_thd(sock, addr):
+    try:
+        data = sock.recv(2048)
+        print(data)
+        print(data.decode())
+        response, biscuit = parse_req(data.decode())
+        write_sock(sock, response, biscuit)
+        sock.close()
+        print("maindone")
+
+    except Exception as e:
+        print("err:", e)
+
 print("server started, ctrl c to close")
+threading.Thread(target=thd_splitter).start()
+
+try:
+    # while 1:
+    #     try:
+    #         client_sock, client_addr = serv_sock.accept()
+    #         data = client_sock.recv(2048)
+    #         print("new conn", client_addr, client_sock)
+    #         threading.Thread(target=main_thd, args=(client_sock, client_addr, data)).start()
+
+    #     except Exception as e:
+    #         print("E", e)
+    while 1:
+        i = input("enter to out")
+        if i == "":
+            os.kill(os.getpid(), signal.SIGTERM)
+            break
+except KeyboardInterrupt:
+    print("die")
+    os.kill(os.getpid(), signal.SIGTERM)
+    # break
+'''
 while True:
     # Accept new connections in an infinite loop.
 
-    # '''
+    # 
     try:
         readable, writeable, errs = select.select(sock_list, [], sock_list, 1)
 
@@ -543,3 +590,5 @@ while True:
         print("purge everything")
         os.kill(os.getpid(), signal.SIGTERM)
         break
+
+'''
