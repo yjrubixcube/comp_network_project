@@ -425,8 +425,8 @@ def stream_video(sock):
         # print(addr)
         WIDTH = 400
         # print("revced")
-        # vid = cv2.VideoCapture("never_gonna_give_you_up.mkv")
-        vid = cv2.VideoCapture("video_test.mkv")
+        vid = cv2.VideoCapture("never_gonna_give_you_up.mkv")
+        # vid = cv2.VideoCapture("video_test.mkv")
         fps,st,frames_to_count,cnt = (0,0,20,0)
         while vid.isOpened():
             _,frame = vid.read()
