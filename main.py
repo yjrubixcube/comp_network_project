@@ -434,11 +434,19 @@ def stream_video(sock):
                 # sock.close()
                 break
             frame = imutils.resize(frame,width=WIDTH)
-            encoded,buffer = cv2.imencode('.jpg',frame,[cv2.IMWRITE_JPEG_QUALITY,80])
+            encoded,buffer = cv2.imencode('.jpeg',frame,[cv2.IMWRITE_JPEG_QUALITY,80])
+            print(type(buffer))
             message = base64.b64encode(buffer)
-            sock.sendall(message)
+            print(len(message))
+            # message = b""
+            # sock.sendall(bytes(len(message)))
+            # sock.sendall()
+            # print(f"+++{len(message)}+++".encode() + message)
+            # break
+            sock.sendall(f"+++{len(message)}+++".encode() + message)
             # frame = cv2.putText(frame,'FPS: '+str(fps),(10,40),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
             # cv2.imshow('TRANSMITTING VIDEO',frame)
+            time.sleep(1)
             key = cv2.waitKey(1) & 0xFF
             if key == ord('q'):
                 # sock.close()
