@@ -446,7 +446,7 @@ def stream_video(sock):
             sock.sendall(f"+++{len(message)}+++".encode() + message)
             # frame = cv2.putText(frame,'FPS: '+str(fps),(10,40),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
             # cv2.imshow('TRANSMITTING VIDEO',frame)
-            time.sleep(1)
+            # time.sleep(1)
             key = cv2.waitKey(1) & 0xFF
             if key == ord('q'):
                 # sock.close()
