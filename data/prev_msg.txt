@@ -1,8 +1,0 @@
-Fri Dec 16 17:26:45 2022	wen	: message
-Fri Dec 16 17:27:11 2022	wen	: abc
-Fri Dec 16 17:27:18 2022	wen	: shao chun
-Fri Dec 16 17:27:22 2022	wen	: !@#$%^&*()
-Fri Dec 16 17:41:56 2022	wen	: hello
-Fri Dec 16 17:47:04 2022	wen	: msg
-Fri Dec 16 17:47:53 2022	1	: die
-Fri Dec 16 22:45:13 2022	1	: eoirf
