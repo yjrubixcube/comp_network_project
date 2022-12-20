@@ -2,7 +2,7 @@
 import os
 import signal
 import socket
-# import select
+import select
 import time
 from urllib.parse import unquote
 import threading
@@ -547,7 +547,7 @@ def main_thd(sock, addr):
 
     except Exception as e:
         print("err:", e)
-
+'''
 print("server started, ctrl c to close")
 threading.Thread(target=thd_splitter).start()
 
@@ -612,4 +612,4 @@ while True:
         os.kill(os.getpid(), signal.SIGTERM)
         break
 
-'''
+# '''
