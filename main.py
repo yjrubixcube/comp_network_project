@@ -448,7 +448,7 @@ def stream_video(sock):
             if key == ord('q'):
                 # sock.close()
                 break
-            cnt+=1
+            # cnt+=1
     except Exception as e:
         print("video error:", e)
         return
