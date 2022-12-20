@@ -1,4 +1,4 @@
-import socket, cv2, imutils, numpy, threading, wave, pyaudio, pickle, struct
+import socket, pyaudio, pickle, struct
 
 # def audo():
 p = pyaudio.PyAudio()
@@ -17,7 +17,7 @@ client_sock.sendall("hello".encode())
 print("sent")
 data = b''
 p_sz = struct.calcsize("Q")
-
+print("ctrl C to stop")
 while 1:
     try:
         while len(data) < p_sz:
