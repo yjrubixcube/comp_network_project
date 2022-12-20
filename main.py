@@ -2,7 +2,7 @@
 import os
 import signal
 import socket
-import select
+# import select
 import time
 from urllib.parse import unquote
 import threading
@@ -11,8 +11,8 @@ import threading
 import pickle
 import cv2
 import struct
-import numpy
-import math
+# import numpy
+# import math
 import imutils
 import base64
 import pyaudio
@@ -399,7 +399,7 @@ def stream_audio(sock):
 
         wf = wave.open("never_gonna_give_you_up.wav", 'rb')
         p = pyaudio.PyAudio()
-        stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+        _ = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                         channels=wf.getnchannels(),
                         rate=wf.getframerate(),
                         input=True,
@@ -427,14 +427,13 @@ def stream_video(sock):
         # print("revced")
         vid = cv2.VideoCapture("never_gonna_give_you_up.mkv")
         # vid = cv2.VideoCapture("video_test.mkv")
-        fps,st,frames_to_count,cnt = (0,0,20,0)
         while vid.isOpened():
             _,frame = vid.read()
             if frame is None:
                 # sock.close()
                 break
             frame = imutils.resize(frame,width=WIDTH)
-            encoded,buffer = cv2.imencode('.jpeg',frame,[cv2.IMWRITE_JPEG_QUALITY,80])
+            _, buffer = cv2.imencode('.jpeg',frame,[cv2.IMWRITE_JPEG_QUALITY,80])
             # print(type(buffer))
             message = base64.b64encode(buffer)
             # print(len(message))
@@ -444,8 +443,6 @@ def stream_video(sock):
             # print(f"+++{len(message)}+++".encode() + message)
             # break
             sock.sendall(f"+++{len(message)}+++".encode() + message)
-            # frame = cv2.putText(frame,'FPS: '+str(fps),(10,40),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
-            # cv2.imshow('TRANSMITTING VIDEO',frame)
             time.sleep(0.01)
             key = cv2.waitKey(1) & 0xFF
             if key == ord('q'):

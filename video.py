@@ -42,7 +42,7 @@ while True:
                 break
             packet += p
             remain -= len(p)
-        print("recv")
+        # print("recv")
         # print(packet)
         # print(len(packet))
         data = base64.b64decode(packet,' /')
@@ -50,10 +50,10 @@ while True:
         npdata = np.fromstring(data,dtype=np.uint8)
         frame = cv2.imdecode(npdata,1)
         # print(not frame)
-        print("dick")
+        # print("dick")
         # frame = cv2.putText(frame,'FPS: '+str(fps),(10,40),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,0,255),2)
-        cv2.imshow("RECEIVING VIDEO",frame)
-        print("shown")
+        cv2.imshow("RickRoll",frame)
+        # print("shown")
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             # client_socket.close()
@@ -67,6 +67,8 @@ while True:
     except KeyboardInterrupt:
         print("interrupt")
         break
+    except ValueError:
+        pass
     except Exception as e:
         print("error:", e)
         # break
